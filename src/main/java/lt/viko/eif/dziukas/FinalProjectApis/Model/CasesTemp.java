@@ -2,7 +2,7 @@ package lt.viko.eif.dziukas.FinalProjectApis.Model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Cases {
+public class CasesTemp {
 
     @JsonProperty("new")
     private String new_cases;
@@ -16,7 +16,7 @@ public class Cases {
     @JsonProperty("critical")
     private Integer critical;
 
-    public Cases(){
+    public CasesTemp(){
 
     }
 

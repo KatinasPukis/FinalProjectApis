@@ -2,11 +2,9 @@ package lt.viko.eif.dziukas.FinalProjectApis.controllers;
 
 import lt.viko.eif.dziukas.FinalProjectApis.APIs.COVID19;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.Root;
-import lt.viko.eif.dziukas.FinalProjectApis.Model.Country;
-import lt.viko.eif.dziukas.FinalProjectApis.Model.Country;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryTemp;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.hateoas.Link;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -25,11 +23,11 @@ public class ResourceController {
     private COVID19 covid19 = new COVID19();
 
     @GetMapping("/countries")
-    public CollectionModel<EntityModel<Country>> index() {
+    public CollectionModel<EntityModel<CountryTemp>> index() {
 
-        List<EntityModel<Country>> countries = covid19.getCountriesAPI().stream().map(
-                country -> EntityModel.of(country,
-                        linkTo(methodOn(ResourceController.class).getCovidStatisticsById(country.getCountryName())).withSelfRel(),
+        List<EntityModel<CountryTemp>> countries = covid19.getCountriesAPI().stream().map(
+                countryTemp -> EntityModel.of(countryTemp,
+                        linkTo(methodOn(ResourceController.class).getCovidStatisticsById(countryTemp.getCountryName())).withSelfRel(),
                         linkTo(methodOn(ResourceController.class).index()).withRel("get-country-covid-info"))).collect(Collectors.toList());
         return CollectionModel.of(countries, linkTo(methodOn(ResourceController.class).index()).withSelfRel());
     }

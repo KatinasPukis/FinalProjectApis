@@ -1,7 +1,7 @@
 package lt.viko.eif.dziukas.FinalProjectApis.APIs;
 
 import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.Root;
-import lt.viko.eif.dziukas.FinalProjectApis.Model.Country;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryTemp;
 import com.google.gson.Gson;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -16,7 +16,7 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class COVID19 {
-    public List<Country> getCountriesAPI(){
+    public List<CountryTemp> getCountriesAPI(){
         // API IS RAPID API, KAD GAUT SALIU MASYVA
         OkHttpClient client = new OkHttpClient();
 
@@ -53,11 +53,11 @@ public class COVID19 {
         System.out.println(obj);
         String correntJsonString = String.valueOf(obj); // objekta pasiverciu vel i correct stringa
 
-        List<Country> countries = new ArrayList<>();
+        List<CountryTemp> countries = new ArrayList<>();
         for (int i = 0; i < countriesJson.length(); i++) {
-            Country country = new Country();
-            country.setCountryName(countriesJson.getString(i));
-            countries.add(country);
+            CountryTemp countryTemp = new CountryTemp();
+            countryTemp.setCountryName(countriesJson.getString(i));
+            countries.add(countryTemp);
         }
         System.out.println(countries);
         return countries;

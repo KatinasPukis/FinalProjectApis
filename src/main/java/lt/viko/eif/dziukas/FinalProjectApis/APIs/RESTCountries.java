@@ -9,7 +9,7 @@ import org.json.JSONArray;
 import org.json.JSONObject;
 
 public class RESTCountries {
-    public void getAllCountries() {
+    public Countries getAllCountries() {
         try {
             OkHttpClient client = new OkHttpClient();
 
@@ -35,6 +35,7 @@ public class RESTCountries {
 
 
             System.out.println("POJO: " + countries);
+            return countries;
         }
         catch (Exception exc) {
             System.out.println(exc);

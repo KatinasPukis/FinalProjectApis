@@ -10,7 +10,7 @@ import okhttp3.Response;
 import java.io.IOException;
 
 public class BestCapitalHotel {
-    public void getBestHotelInTheCapital (/*String country, String city*/) {
+    public Hotel getBestHotelInTheCapital (/*String country, String city*/) {
         try {
             OkHttpClient client = new OkHttpClient();
 
@@ -28,8 +28,7 @@ public class BestCapitalHotel {
             Gson gson = new Gson();
             Hotel hotel = gson.fromJson(json, Hotel.class);
 
-            System.out.println("JSON: " + json);
-            System.out.println("GSON: " + hotel);
+            return hotel;
         }
         catch (Exception exc){
             System.out.println(exc);
