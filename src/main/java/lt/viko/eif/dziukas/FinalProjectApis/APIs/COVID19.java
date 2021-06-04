@@ -2,6 +2,7 @@ package lt.viko.eif.dziukas.FinalProjectApis.APIs;
 
 import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.Statistics;
 import com.google.gson.Gson;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.WorldStats;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
@@ -49,5 +50,30 @@ public class COVID19 {
         String correntJsonString = String.valueOf(obj);
         Statistics CountryResponse = gson.fromJson(correntJsonString, Statistics.class);
         return CountryResponse;
+    }
+
+    public WorldStats getCovid19WorldStats() {
+        try {
+            OkHttpClient client = new OkHttpClient();
+
+            Request request = new Request.Builder()
+                    .url("https://covid-19-tracking.p.rapidapi.com/v1/world")
+                    .get()
+                    .addHeader("x-rapidapi-key", "3a72bede79msh3e5d354bbb1baa6p168035jsn8f45e363d125")
+                    .addHeader("x-rapidapi-host", "covid-19-tracking.p.rapidapi.com")
+                    .build();
+
+            Response response = client.newCall(request).execute();
+
+            Gson gson = new Gson();
+            String json = response.body().string();
+
+            WorldStats worldStats = gson.fromJson(json, WorldStats.class);
+            return worldStats;
+        }
+        catch (Exception exc) {
+            System.out.println(exc);
+        }
+        return null;
     }
 }
