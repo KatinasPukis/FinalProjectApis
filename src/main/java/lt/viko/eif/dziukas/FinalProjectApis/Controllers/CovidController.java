@@ -1,7 +1,7 @@
 package lt.viko.eif.dziukas.FinalProjectApis.Controllers;
 
 import lt.viko.eif.dziukas.FinalProjectApis.APIs.COVID19;
-import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.Root;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.Statistics;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,9 +19,9 @@ public class CovidController {
 
     @GetMapping("/covid/{country}")
     @ResponseBody
-    public ResponseEntity<EntityModel<Root>> getCovidStatisticsByCountry(@PathVariable(value="country") String country) {
+    public ResponseEntity<EntityModel<Statistics>> getCovidStatisticsByCountry(@PathVariable(value="country") String country) {
 
-        EntityModel<Root> statistics = EntityModel.of(covid19.getCovidStatisticsByCountryAPI(country));
+        EntityModel<Statistics> statistics = EntityModel.of(covid19.getCovidStatisticsByCountryAPI(country));
         final String selfString = ServletUriComponentsBuilder.fromCurrentRequest().build().toUriString();
 
         statistics.add(linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"));

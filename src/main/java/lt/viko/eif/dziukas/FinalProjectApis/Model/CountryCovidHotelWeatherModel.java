@@ -1,7 +1,7 @@
 package lt.viko.eif.dziukas.FinalProjectApis.Model;
 
 import lt.viko.eif.dziukas.FinalProjectApis.Model.BestCapitalHotelModel.Hotel;
-import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.Root;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.Statistics;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.WeatherModel.Weather;
 
@@ -9,7 +9,7 @@ import lt.viko.eif.dziukas.FinalProjectApis.Model.WeatherModel.Weather;
 public class CountryCovidHotelWeatherModel {
     private Country country;
     private Hotel bestHotelInCountriesCapital; // MOKAMAS Api, 10max XDD
-    private Root covidStatistics;
+    private Statistics covidStatistics;
     private Weather weather;
 
     public Country getCountry() {
@@ -28,11 +28,11 @@ public class CountryCovidHotelWeatherModel {
         this.bestHotelInCountriesCapital = bestHotelInCountriesCapital;
     }
 
-    public Root getCovidStatistics() {
+    public Statistics getCovidStatistics() {
         return covidStatistics;
     }
 
-    public void setCovidStatistics(Root covidStatistics) {
+    public void setCovidStatistics(Statistics covidStatistics) {
         this.covidStatistics = covidStatistics;
     }
 

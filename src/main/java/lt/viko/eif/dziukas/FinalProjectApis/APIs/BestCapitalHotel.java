@@ -2,13 +2,10 @@ package lt.viko.eif.dziukas.FinalProjectApis.APIs;
 
 import com.google.gson.Gson;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.BestCapitalHotelModel.Hotel;
-import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.Root;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
-
-import java.io.IOException;
 
 public class BestCapitalHotel {
     public Hotel getBestHotelInTheCapital (Country country) {

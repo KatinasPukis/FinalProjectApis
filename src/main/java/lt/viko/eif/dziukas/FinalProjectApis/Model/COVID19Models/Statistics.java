@@ -2,10 +2,10 @@ package lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models;
 
 import java.util.List;
 
-public class Root {
+public class Statistics {
     private List<Response> response;
 
-    public Root() {
+    public Statistics() {
 
     }
 
