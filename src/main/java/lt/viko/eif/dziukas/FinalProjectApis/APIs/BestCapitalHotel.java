@@ -8,12 +8,12 @@ import okhttp3.Request;
 import okhttp3.Response;
 
 public class BestCapitalHotel {
-    public Hotel getBestHotelInTheCapital (Country country) {
+    public Hotel getBestHotelInTheCapital (String countryName, String countryCapital) {
         try {
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
-                    .url("https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation?cityName=" + country.getCapital() +"&countryName=" + country.getName())
+                    .url("https://best-booking-com-hotel.p.rapidapi.com/booking/best-accommodation?cityName=" + countryCapital +"&countryName=" + countryName)
                     .get()
                     .addHeader("x-rapidapi-key", "3a72bede79msh3e5d354bbb1baa6p168035jsn8f45e363d125")
                     .addHeader("x-rapidapi-host", "best-booking-com-hotel.p.rapidapi.com")

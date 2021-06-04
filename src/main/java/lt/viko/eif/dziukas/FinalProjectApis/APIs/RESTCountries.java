@@ -66,11 +66,25 @@ public class RESTCountries {
             }
 
             countryFull.setCountry(countryToAdd);
-            countryFull.setBestHotelInCountriesCapital(hotel.getBestHotelInTheCapital(countryToAdd));
+            countryFull.setBestHotelInCountriesCapital(hotel.getBestHotelInTheCapital(countryToAdd.getName(), countryToAdd.getCapital()));
             countryFull.setCovidStatistics(covid.getCovidStatisticsByCountryAPI(countryToAdd.getName()));
             countryFull.setWeather(weather.getCapitalWeather(countryToAdd.getName()));
 
             return countryFull;
+        }
+        catch (Exception exc) {
+            System.out.println(exc);
+        }
+        return null;
+    }
+
+    public String GetCountryCapitalByName(String countryName) {
+        try {
+            for (Country country: getAllCountries().getCountries()) {
+                if(countryName.equals(country.getName())) {
+                    return country.getCapital();
+                }
+            }
         }
         catch (Exception exc) {
             System.out.println(exc);

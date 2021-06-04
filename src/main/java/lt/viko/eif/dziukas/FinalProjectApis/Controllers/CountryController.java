@@ -4,6 +4,7 @@ import lt.viko.eif.dziukas.FinalProjectApis.APIs.COVID19;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryCovidHotelWeatherModel;
 import lt.viko.eif.dziukas.FinalProjectApis.APIs.RESTCountries;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.WeatherModel.Weather;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
@@ -35,11 +36,9 @@ public class CountryController {
     public ResponseEntity<EntityModel<CountryCovidHotelWeatherModel>> GetCountryByName(@PathVariable(value="countryName") String name){
 
         EntityModel<CountryCovidHotelWeatherModel> country = EntityModel.of(restcountries.GetCountryByName(name));
-
         country.add(linkTo(methodOn(CovidController.class).getCovidStatisticsByCountry(name)).withRel("get-covid-statistics"));
-        //country.add(linkTo(methodOn()))
-        //country.add(linkTo(methodOn()))
-        //country.add(linkTo(methodOn()))
+        country.add(linkTo(methodOn(HotelController.class).getHotelByCountryName(name)).withRel("get-hotel-info"));
+        country.add(linkTo(methodOn(WeatherController.class).getWeatherByCountryName(name)).withRel("get-weather-info"));
         return ResponseEntity.ok(country);
     }
 }

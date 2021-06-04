@@ -1,6 +1,8 @@
 package lt.viko.eif.dziukas.FinalProjectApis.Controllers;
 
-import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.Statistics;
+import lt.viko.eif.dziukas.FinalProjectApis.APIs.BestCapitalHotel;
+import lt.viko.eif.dziukas.FinalProjectApis.APIs.RESTCountries;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.BestCapitalHotelModel.Hotel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,14 +16,14 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
 public class HotelController {
-    /*@GetMapping("/hotels/{hotel}")
-    @ResponseBody
-    public ResponseEntity<EntityModel<Statistics>> getHotelByCountry(@PathVariable(value="hotel") String country) {
+    private static BestCapitalHotel hotel = new BestCapitalHotel();
+    private static RESTCountries countries = new RESTCountries();
 
-        EntityModel<Statistics> statistics = EntityModel.of(covid19.getCovidStatisticsByCountryAPI(country));
-        final String selfString = ServletUriComponentsBuilder.fromCurrentRequest().build().toUriString();
+    @GetMapping("/hotels/{countryName}")
+    public ResponseEntity<EntityModel<Hotel>> getHotelByCountryName(@PathVariable(value="countryName") String countryName) {
 
-        statistics.add(linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"));
-        return ResponseEntity.ok(statistics);
-    }*/
+        EntityModel<Hotel> returnHotel = EntityModel.of(hotel.getBestHotelInTheCapital(countryName, countries.GetCountryCapitalByName(countryName)));
+        returnHotel.add(linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"));
+        return ResponseEntity.ok(returnHotel);
+    }
 }
