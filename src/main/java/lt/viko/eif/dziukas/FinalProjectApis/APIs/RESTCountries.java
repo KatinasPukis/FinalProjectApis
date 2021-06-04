@@ -39,7 +39,7 @@ public class RESTCountries {
             Gson gson = new Gson();
             Countries countries = gson.fromJson(json, Countries.class);
 
-            System.out.println("POJO: " + countries);
+            //System.out.println("POJO: " + countries);
             return countries;
         }
         catch (Exception exc) {

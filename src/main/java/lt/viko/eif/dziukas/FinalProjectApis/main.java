@@ -12,8 +12,8 @@ public class main {
     public static void main(String[] args) {
        //BestCapitalHotel bestCapitalHotel = new BestCapitalHotel(); // tikrinam
        // bestCapitalHotel.getBestHotelInTheCapital(); // tikrinam
-        RESTCountries restCountries = new RESTCountries();
-        restCountries.getAllCountries();
+        //RESTCountries restCountries = new RESTCountries();
+        //restCountries.getAllCountries();
         SpringApplication.run(main.class, args);
         }
     }
