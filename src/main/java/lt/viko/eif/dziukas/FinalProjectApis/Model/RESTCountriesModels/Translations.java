@@ -3,69 +3,64 @@ package lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Translations {
-    @JsonProperty("de")
-    private String german;
-    @JsonProperty("es")
-    private String spanish;
-    @JsonProperty("fr")
-    private String french;
-    @JsonProperty("ja")
-    private String japanese;
-    @JsonProperty("it")
-    private String italian;
+    private String de;
+    private String es;
+    private String fr;
+    private String ja;
+    private String it;
 
     public Translations() {
 
     }
 
-    public String getGerman() {
-        return german;
+    public String getDe() {
+        return de;
     }
 
-    public void setGerman(String german) {
-        this.german = german;
+    public void setDe(String de) {
+        this.de = de;
     }
 
-    public String getSpanish() {
-        return spanish;
+    public String getEs() {
+        return es;
     }
 
-    public void setSpanish(String spanish) {
-        this.spanish = spanish;
+    public void setEs(String es) {
+        this.es = es;
     }
 
-    public String getFrench() {
-        return french;
+    public String getFr() {
+        return fr;
     }
 
-    public void setFrench(String french) {
-        this.french = french;
+    public void setFr(String fr) {
+        this.fr = fr;
     }
 
-    public String getJapanese() {
-        return japanese;
+    public String getJa() {
+        return ja;
     }
 
-    public void setJapanese(String japanese) {
-        this.japanese = japanese;
+    public void setJa(String ja) {
+        this.ja = ja;
     }
 
-    public String getItalian() {
-        return italian;
+    public String getIt() {
+        return it;
     }
 
-    public void setItalian(String italian) {
-        this.italian = italian;
+    public void setIt(String it) {
+        this.it = it;
     }
 
     @Override
     public String toString() {
         return "Translations{" +
-                "german='" + german + '\'' +
-                ", spanish='" + spanish + '\'' +
-                ", french='" + french + '\'' +
-                ", japanese='" + japanese + '\'' +
-                ", italian='" + italian + '\'' +
+                "de='" + de + '\'' +
+                ", es='" + es + '\'' +
+                ", fr='" + fr + '\'' +
+                ", ja='" + ja + '\'' +
+                ", it='" + it + '\'' +
                 '}';
     }
 }
