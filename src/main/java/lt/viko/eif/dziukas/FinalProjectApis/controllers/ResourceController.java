@@ -3,7 +3,6 @@ package lt.viko.eif.dziukas.FinalProjectApis.controllers;
 import lt.viko.eif.dziukas.FinalProjectApis.APIs.COVID19;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.Root;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryCovidHotelWeatherModel;
-import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryTemp;
 import lt.viko.eif.dziukas.FinalProjectApis.APIs.RESTCountries;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
 import org.springframework.hateoas.CollectionModel;
@@ -36,11 +35,12 @@ public class ResourceController {
         return CollectionModel.of(countries, linkTo(methodOn(ResourceController.class).index()).withSelfRel());
     }
 
-    @GetMapping("/countries/{id}")
-    public ResponseEntity<EntityModel<CountryCovidHotelWeatherModel>> GetCountryById(){
+    @GetMapping("/countries/{countryName}")
+    public ResponseEntity<EntityModel<CountryCovidHotelWeatherModel>> index2(@PathVariable(value="countryName") String name){
+        //CountryCovidHotelWeatherModel mainModel = restcountries.GetCountryByID();
 
-        EntityModel<CountryCovidHotelWeatherModel> country = restcountries.
-
+        EntityModel<CountryCovidHotelWeatherModel> country = EntityModel.of(restcountries.GetCountryByName(name));
+        return ResponseEntity.ok(country);
     }
 
     @GetMapping("/covid/{country}")

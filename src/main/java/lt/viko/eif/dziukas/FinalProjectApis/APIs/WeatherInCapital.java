@@ -11,12 +11,12 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class WeatherInCapital {
-    public Weather getCapitalWeather() {
+    public Weather getCapitalWeather(String name) {
         try {
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
-                    .url("https://community-open-weather-map.p.rapidapi.com/find?q=london&cnt=1&mode=null&lon=0&type=link%2C%20accurate&lat=0&units=metric")
+                    .url("https://community-open-weather-map.p.rapidapi.com/find?q=" + name +"&cnt=1&mode=null&lon=0&type=link%2C%20accurate&lat=0&units=metric")
                     .get()
                     .addHeader("x-rapidapi-key", "3a72bede79msh3e5d354bbb1baa6p168035jsn8f45e363d125")
                     .addHeader("x-rapidapi-host", "community-open-weather-map.p.rapidapi.com")
