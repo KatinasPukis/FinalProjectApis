@@ -33,5 +33,6 @@ public class BestCapitalHotel {
         catch (Exception exc){
             System.out.println(exc);
         }
+        return null;
     }
 }

@@ -1,21 +1,21 @@
 package lt.viko.eif.dziukas.FinalProjectApis.Model.UserModels;
 
-import lt.viko.eif.dziukas.FinalProjectApis.Model.Country;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryCovidHotelWeatherModel;
 
 import java.util.List;
 
 public class VisitedCountries {
-    private List<Country> countries;
+    private List<CountryCovidHotelWeatherModel> countries;
 
-    public VisitedCountries(List<Country> countries) {
+    public VisitedCountries(List<CountryCovidHotelWeatherModel> countries) {
         this.countries = countries;
     }
 
-    public List<Country> getCountries() {
+    public List<CountryCovidHotelWeatherModel> getCountries() {
         return countries;
     }
 
-    public void setCountries(List<Country> countries) {
+    public void setCountries(List<CountryCovidHotelWeatherModel> countries) {
         this.countries = countries;
     }
 }

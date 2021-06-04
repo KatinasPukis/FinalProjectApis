@@ -2,7 +2,10 @@ package lt.viko.eif.dziukas.FinalProjectApis.controllers;
 
 import lt.viko.eif.dziukas.FinalProjectApis.APIs.COVID19;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models.Root;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryCovidHotelWeatherModel;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryTemp;
+import lt.viko.eif.dziukas.FinalProjectApis.APIs.RESTCountries;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
@@ -21,15 +24,23 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 @RestController
 public class ResourceController {
     private COVID19 covid19 = new COVID19();
+    private RESTCountries restcountries = new RESTCountries();
 
     @GetMapping("/countries")
-    public CollectionModel<EntityModel<CountryTemp>> index() {
+    public CollectionModel<EntityModel<Country>> index() {
 
-        List<EntityModel<CountryTemp>> countries = covid19.getCountriesAPI().stream().map(
-                countryTemp -> EntityModel.of(countryTemp,
-                        linkTo(methodOn(ResourceController.class).getCovidStatisticsById(countryTemp.getCountryName())).withSelfRel(),
-                        linkTo(methodOn(ResourceController.class).index()).withRel("get-country-covid-info"))).collect(Collectors.toList());
+        List<EntityModel<Country>> countries = restcountries.getAllCountries().getCountries().stream().map(
+                        Country -> EntityModel.of(Country,
+                        //linkTo(methodOn(ResourceController.class).getCovidStatisticsById(countryTemp.getCountryName())).withSelfRel(),
+                        linkTo(methodOn(ResourceController.class).index()).withRel("get-all-countries"))).collect(Collectors.toList());
         return CollectionModel.of(countries, linkTo(methodOn(ResourceController.class).index()).withSelfRel());
+    }
+
+    @GetMapping("/countries/{id}")
+    public ResponseEntity<EntityModel<CountryCovidHotelWeatherModel>> GetCountryById(){
+
+        EntityModel<CountryCovidHotelWeatherModel> country = restcountries.
+
     }
 
     @GetMapping("/covid/{country}")

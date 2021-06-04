@@ -1,19 +1,19 @@
 package lt.viko.eif.dziukas.FinalProjectApis.Model.UserModels;
 
-import lt.viko.eif.dziukas.FinalProjectApis.Model.Country;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryCovidHotelWeatherModel;
 
 public class ToVisitCountry {
-    private Country country;
+    private CountryCovidHotelWeatherModel countryCovidHotelWeatherModel;
 
-    public ToVisitCountry(Country country) {
-        this.country = country;
+    public ToVisitCountry(CountryCovidHotelWeatherModel countryCovidHotelWeatherModel) {
+        this.countryCovidHotelWeatherModel = countryCovidHotelWeatherModel;
     }
 
-    public Country getCountry() {
-        return country;
+    public CountryCovidHotelWeatherModel getCountry() {
+        return countryCovidHotelWeatherModel;
     }
 
-    public void setCountry(Country country) {
-        this.country = country;
+    public void setCountry(CountryCovidHotelWeatherModel countryCovidHotelWeatherModel) {
+        this.countryCovidHotelWeatherModel = countryCovidHotelWeatherModel;
     }
 }
