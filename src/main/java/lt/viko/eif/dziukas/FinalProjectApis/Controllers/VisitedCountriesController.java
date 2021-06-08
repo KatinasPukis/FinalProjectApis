@@ -1,8 +1,9 @@
 package lt.viko.eif.dziukas.FinalProjectApis.Controllers;
 
-import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryCovidHotelWeatherModel;
-import lt.viko.eif.dziukas.FinalProjectApis.APIs.RESTCountries;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.BestCapitalHotelModel.Hotel;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Countries;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
+import lt.viko.eif.dziukas.FinalProjectApis.Repositories.UserRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.http.ResponseEntity;
@@ -17,14 +18,13 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
-public class CountryController {
-    private static RESTCountries restcountries = new RESTCountries();
+public class VisitedCountriesController {
+    private static UserRepository repository = new UserRepository();
 
-    @GetMapping("/countries")
-    public CollectionModel<EntityModel<Country>> GetAllCountries() {
-
-        List<EntityModel<Country>> countries = restcountries.getAllCountries().getCountries().stream().map(
-                        country -> EntityModel.of(country,
+    @GetMapping("/visited")
+    public CollectionModel<EntityModel<Country>> GetAllVisitedCountries() {
+        List<EntityModel<Country>> countries = repository.GetCountriesVisited().getCountries().stream().map(
+                country -> EntityModel.of(country,
                         linkTo(methodOn(CountryController.class).GetCountryByName(country.getName())).withSelfRel(),
                         linkTo(methodOn(CovidController.class).getCovidStatisticsByCountry(country.getName())).withRel("get-covid-statistics"),
                         linkTo(methodOn(HotelController.class).getHotelByCountryName(country.getName())).withRel("get-hotel-info"),
@@ -33,15 +33,4 @@ public class CountryController {
         return CollectionModel.of(countries, linkTo(methodOn(CountryController.class).GetAllCountries()).withSelfRel());
     }
 
-    @GetMapping("/countries/{countryName}")
-    public ResponseEntity<EntityModel<CountryCovidHotelWeatherModel>> GetCountryByName(@PathVariable(value="countryName") String name){
-
-        EntityModel<CountryCovidHotelWeatherModel> country = EntityModel.of(restcountries.GetCountryCovidHotelWeatherByName(name));
-        country.add(linkTo(methodOn(CountryController.class).GetCountryByName(name)).withSelfRel());
-        country.add(linkTo(methodOn(CovidController.class).getCovidStatisticsByCountry(name)).withRel("get-covid-statistics"));
-        country.add(linkTo(methodOn(HotelController.class).getHotelByCountryName(name)).withRel("get-hotel-info"));
-        country.add(linkTo(methodOn(WeatherController.class).getWeatherByCountryName(name)).withRel("get-weather-info"));
-        country.add(linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"));
-        return ResponseEntity.ok(country);
-    }
 }

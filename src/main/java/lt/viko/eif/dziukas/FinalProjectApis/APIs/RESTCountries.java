@@ -1,7 +1,6 @@
 package lt.viko.eif.dziukas.FinalProjectApis.APIs;
 
 import com.google.gson.Gson;
-import lt.viko.eif.dziukas.FinalProjectApis.Model.BestCapitalHotelModel.Hotel;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryCovidHotelWeatherModel;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Countries;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
@@ -29,7 +28,6 @@ public class RESTCountries {
 
             Response response = client.newCall(request).execute();
             String jsonFromResponse = response.body().string();
-            //System.out.println("jsonFromResponse: "+ jsonFromResponse);
 
             JSONObject jsonObject = new JSONObject();
             JSONArray jsonArray = new JSONArray(jsonFromResponse);
@@ -39,7 +37,6 @@ public class RESTCountries {
             Gson gson = new Gson();
             Countries countries = gson.fromJson(json, Countries.class);
 
-            //System.out.println("POJO: " + countries);
             return countries;
         }
         catch (Exception exc) {
@@ -53,8 +50,9 @@ public class RESTCountries {
      *
      * @return CountryCovidHotelWeatherModel object or null if faulted.
      */
-    public CountryCovidHotelWeatherModel GetCountryByName(String name) {
+    public CountryCovidHotelWeatherModel GetCountryCovidHotelWeatherByName(String name) {
         try {
+
             CountryCovidHotelWeatherModel countryFull = new CountryCovidHotelWeatherModel();
             Country countryToAdd = new Country();
 
@@ -71,6 +69,21 @@ public class RESTCountries {
             countryFull.setWeather(weather.getCapitalWeather(countryToAdd.getName()));
 
             return countryFull;
+        }
+        catch (Exception exc) {
+            System.out.println(exc);
+        }
+        return null;
+    }
+
+    public Country GetCountryByName(String name) {
+        try {
+            for (Country temp: getAllCountries().getCountries()) {
+                if(temp.getName().equals(name))
+                {
+                    return temp;
+                }
+            }
         }
         catch (Exception exc) {
             System.out.println(exc);
