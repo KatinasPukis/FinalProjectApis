@@ -25,13 +25,14 @@ public class CovidController {
     public ResponseEntity<EntityModel<Statistics>> getCovidStatisticsByCountry(@PathVariable(value="country") String country) {
         EntityModel<Statistics> statistics = EntityModel.of(covid19.getCovidStatisticsByCountryAPI(country));
         statistics.add(linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"));
+        statistics.add(linkTo(methodOn(CovidController.class).getWorldCovidStatistics()).withRel("get-world-stats"));
         return ResponseEntity.ok(statistics);
     }
     @GetMapping("/covid")
     @ResponseBody
     public ResponseEntity<EntityModel<WorldStats>> getWorldCovidStatistics() {
         EntityModel<WorldStats> worldStats = EntityModel.of(covid19.getCovid19WorldStats());
-        worldStats.add(linkTo(methodOn(COVID19.class).getCovid19WorldStats()).withSelfRel());
+        worldStats.add(linkTo(methodOn(CovidController.class).getWorldCovidStatistics()).withSelfRel());
         return ResponseEntity.ok(worldStats);
     }
 }

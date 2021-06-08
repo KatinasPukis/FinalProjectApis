@@ -1,12 +1,17 @@
 package lt.viko.eif.dziukas.FinalProjectApis.Model.WeatherModel;
 
+import com.google.gson.annotations.SerializedName;
+
 public class Weather {
     private double temp;
-    private double temp_min;
+    @SerializedName("temp_min")
+    private double tempMin;
     private double humidity;
     private double pressure;
-    private double feels_like;
-    private double temp_max;
+    @SerializedName("feels_like")
+    private double feelsLike;
+    @SerializedName("temp_max")
+    private double tempMax;
 
     public Weather() {
 
@@ -20,12 +25,12 @@ public class Weather {
         this.temp = temp;
     }
 
-    public double getTemp_min() {
-        return temp_min;
+    public double getTempMin() {
+        return tempMin;
     }
 
-    public void setTemp_min(double temp_min) {
-        this.temp_min = temp_min;
+    public void setTempMin(double tempMin) {
+        this.tempMin = tempMin;
     }
 
     public double getHumidity() {
@@ -44,31 +49,31 @@ public class Weather {
         this.pressure = pressure;
     }
 
-    public double getFeels_like() {
-        return feels_like;
+    public double getFeelsLike() {
+        return feelsLike;
     }
 
-    public void setFeels_like(double feels_like) {
-        this.feels_like = feels_like;
+    public void setFeelsLike(double feelsLike) {
+        this.feelsLike = feelsLike;
     }
 
-    public double getTemp_max() {
-        return temp_max;
+    public double getTempMax() {
+        return tempMax;
     }
 
-    public void setTemp_max(double temp_max) {
-        this.temp_max = temp_max;
+    public void setTempMax(double tempMax) {
+        this.tempMax = tempMax;
     }
 
     @Override
     public String toString() {
         return "Weather{" +
                 "temp=" + temp +
-                ", temp_min=" + temp_min +
+                ", tempMin=" + tempMin +
                 ", humidity=" + humidity +
                 ", pressure=" + pressure +
-                ", feels_like=" + feels_like +
-                ", temp_max=" + temp_max +
+                ", feelsLike=" + feelsLike +
+                ", tempMax=" + tempMax +
                 '}';
     }
 }
