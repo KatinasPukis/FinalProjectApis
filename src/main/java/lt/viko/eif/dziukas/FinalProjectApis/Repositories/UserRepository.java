@@ -50,4 +50,32 @@ public class UserRepository {
             return null;
         }
     }
+
+    public void AddCountryToWishlist(String countryName) throws Exception {
+        try
+        {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery("INSERT INTO `countrytovisit` (`Id`, `Country`, `Date`) VALUES (NULL, 'Lithuania', '2021-06-09');");
+        }
+        catch(Exception exc)
+        {
+            throw new Exception(exc.getMessage());
+        }
+    }
+
+    public void RemoveCountryFromWishlist()
+    {
+
+    }
+
+    public void AddCountryToVisited()
+    {
+
+    }
+
+    public void RemoveCountryFromVisited()
+    {
+
+    }
 }

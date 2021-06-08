@@ -1,14 +1,10 @@
 package lt.viko.eif.dziukas.FinalProjectApis.Controllers;
 
-import lt.viko.eif.dziukas.FinalProjectApis.Model.BestCapitalHotelModel.Hotel;
-import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Countries;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
 import lt.viko.eif.dziukas.FinalProjectApis.Repositories.UserRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
