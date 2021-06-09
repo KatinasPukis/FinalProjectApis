@@ -53,16 +53,20 @@ public class UserRepository {
     }
 
     public void AddCountryToWishlist(String countryName) throws Exception {
-        try
-        {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
-            Statement statement = connection.createStatement();
-            statement.execute(String.format("INSERT INTO `countrytovisit` (`Id`, `Country`, `Date`) VALUES (NULL, '%s', '%s');", countryName, LocalDate.now()));
-        }
-        catch(Exception exc)
-        {
-            throw new Exception(exc.getMessage());
-        }
+
+        try {
+            for (Country country: countriesAPI.getAllCountries().getCountries()) {
+                if(countryName.equals(country.getName())){
+                    try {
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
+                        Statement statement = connection.createStatement();
+                        statement.execute(String.format("INSERT INTO `countrytovisit` (`Id`, `Country`, `Date`) VALUES (NULL, '%s', '%s');", countryName, LocalDate.now()));
+                        return;
+                    } catch(Exception exc) { throw new Exception("couldn't add resource"); }
+                }
+            }
+            throw new Exception("Country does not exist");
+        }catch(Exception exc) { throw new Exception(exc.getMessage()); }
     }
 
     public void RemoveCountryFromWishlist(String countryName) throws Exception {
@@ -74,21 +78,25 @@ public class UserRepository {
         }
         catch(Exception exc)
         {
-            throw new Exception(exc.getMessage());
+            throw new Exception("couldn't remove resource");
         }
     }
 
     public void AddCountryToVisited(String countryName) throws Exception {
-        try
-        {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
-            Statement statement = connection.createStatement();
-            statement.execute(String.format("INSERT INTO `countryvisited` (`Id`, `Country`, `Date`) VALUES (NULL, '%s', '%s');", countryName, LocalDate.now()));
-        }
-        catch(Exception exc)
-        {
-            throw new Exception(exc.getMessage());
-        }
+
+        try {
+            for (Country country: countriesAPI.getAllCountries().getCountries()) {
+                if(countryName.equals(country.getName())){
+                    try {
+                        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
+                        Statement statement = connection.createStatement();
+                        statement.execute(String.format("INSERT INTO `countryvisited` (`Id`, `Country`, `Date`) VALUES (NULL, '%s', '%s');", countryName, LocalDate.now()));
+                        return;
+                    } catch(Exception exc) { throw new Exception("couldn't add resource"); }
+                }
+            }
+            throw new Exception("Country does not exist");
+        }catch(Exception exc) { throw new Exception(exc.getMessage()); }
     }
 
     public void RemoveCountryFromVisited(String countryName) throws Exception {
@@ -100,7 +108,7 @@ public class UserRepository {
         }
         catch(Exception exc)
         {
-            throw new Exception(exc.getMessage());
+            throw new Exception("couldn't remove resource");
         }
     }
 }

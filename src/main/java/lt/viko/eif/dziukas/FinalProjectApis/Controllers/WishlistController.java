@@ -4,10 +4,10 @@ import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
 import lt.viko.eif.dziukas.FinalProjectApis.Repositories.UserRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -30,5 +30,30 @@ public class WishlistController {
                         linkTo(methodOn(CountryController.class).GetCountryByName(country.getName())).withRel("get-country-info"),
                         linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"))).collect(Collectors.toList());
         return CollectionModel.of(countries, linkTo(methodOn(WishlistController.class).GetAllVisitedCountries()).withSelfRel());
+    }
+
+    @PostMapping("{countryName}")
+    public ResponseEntity<String> AddCountryToWishlist(@PathVariable(value="countryName") String countryName) {
+
+        try {
+            repository.AddCountryToWishlist(countryName);
+            return new ResponseEntity<>("resource created successfully", HttpStatus.CREATED);
+        }
+        catch(Exception exc) {
+            System.out.println(exc.getMessage());
+            return new ResponseEntity<>(exc.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @DeleteMapping("{countryName}")
+    public ResponseEntity<String> RemoveCountryFromWishlist(@PathVariable(value="countryName") String countryName){
+        try {
+            repository.RemoveCountryFromWishlist(countryName);
+            return new ResponseEntity<>("resource removed successfully", HttpStatus.CREATED);
+        }
+        catch(Exception exc) {
+            System.out.println(exc.getMessage());
+            return new ResponseEntity<>(exc.getMessage(), HttpStatus.BAD_REQUEST);
+        }
     }
 }
