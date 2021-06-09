@@ -5,6 +5,7 @@ import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Countries;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
 
 import java.sql.*;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -56,7 +57,7 @@ public class UserRepository {
         {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
             Statement statement = connection.createStatement();
-            ResultSet resultSet = statement.executeQuery("INSERT INTO `countrytovisit` (`Id`, `Country`, `Date`) VALUES (NULL, 'Lithuania', '2021-06-09');");
+            statement.execute(String.format("INSERT INTO `countrytovisit` (`Id`, `Country`, `Date`) VALUES (NULL, '%s', '%s');", countryName, LocalDate.now()));
         }
         catch(Exception exc)
         {
@@ -64,18 +65,42 @@ public class UserRepository {
         }
     }
 
-    public void RemoveCountryFromWishlist()
-    {
-
+    public void RemoveCountryFromWishlist(String countryName) throws Exception {
+        try
+        {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
+            Statement statement = connection.createStatement();
+            statement.execute(String.format("DELETE FROM `countrytovisit` WHERE Country='%s';", countryName));
+        }
+        catch(Exception exc)
+        {
+            throw new Exception(exc.getMessage());
+        }
     }
 
-    public void AddCountryToVisited()
-    {
-
+    public void AddCountryToVisited(String countryName) throws Exception {
+        try
+        {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
+            Statement statement = connection.createStatement();
+            statement.execute(String.format("INSERT INTO `countryvisited` (`Id`, `Country`, `Date`) VALUES (NULL, '%s', '%s');", countryName, LocalDate.now()));
+        }
+        catch(Exception exc)
+        {
+            throw new Exception(exc.getMessage());
+        }
     }
 
-    public void RemoveCountryFromVisited()
-    {
-
+    public void RemoveCountryFromVisited(String countryName) throws Exception {
+        try
+        {
+            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
+            Statement statement = connection.createStatement();
+            statement.execute(String.format("DELETE FROM `countryvisited` WHERE Country='%s';", countryName));
+        }
+        catch(Exception exc)
+        {
+            throw new Exception(exc.getMessage());
+        }
     }
 }

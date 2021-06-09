@@ -1,5 +1,6 @@
 package lt.viko.eif.dziukas.FinalProjectApis;
 
+import lt.viko.eif.dziukas.FinalProjectApis.Repositories.UserRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
