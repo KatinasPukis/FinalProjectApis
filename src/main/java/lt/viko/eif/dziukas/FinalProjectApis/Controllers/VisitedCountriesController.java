@@ -4,8 +4,10 @@ import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
 import lt.viko.eif.dziukas.FinalProjectApis.Repositories.UserRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -15,10 +17,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
+@RequestMapping(value = "api/visited",  produces = MediaType.APPLICATION_JSON_VALUE)
 public class VisitedCountriesController {
     private static UserRepository repository = new UserRepository();
 
-    @GetMapping("/visited")
+    @GetMapping
     public CollectionModel<EntityModel<Country>> GetAllVisitedCountries() {
         List<EntityModel<Country>> countries = repository.GetCountriesVisited().getCountries().stream().map(
                 country -> EntityModel.of(country,

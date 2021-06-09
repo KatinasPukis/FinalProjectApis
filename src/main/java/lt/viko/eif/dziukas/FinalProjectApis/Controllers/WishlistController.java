@@ -4,7 +4,9 @@ import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
 import lt.viko.eif.dziukas.FinalProjectApis.Repositories.UserRepository;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
@@ -14,10 +16,11 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
+@RequestMapping(value = "api/wishlist",  produces = MediaType.APPLICATION_JSON_VALUE)
 public class WishlistController {
     private static UserRepository repository = new UserRepository();
 
-    @GetMapping("/wishlist")
+    @GetMapping
     public CollectionModel<EntityModel<Country>> GetAllVisitedCountries() {
         List<EntityModel<Country>> countries = repository.GetWishlist().getCountries().stream().map(
                 country -> EntityModel.of(country,

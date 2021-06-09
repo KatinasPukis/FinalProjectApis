@@ -3,19 +3,22 @@ package lt.viko.eif.dziukas.FinalProjectApis.Controllers;
 import lt.viko.eif.dziukas.FinalProjectApis.APIs.WeatherInCapital;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.WeatherModel.Weather;
 import org.springframework.hateoas.EntityModel;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @RestController
+@RequestMapping(value = "api/weather",  produces = MediaType.APPLICATION_JSON_VALUE)
 public class WeatherController {
     private static WeatherInCapital weather = new WeatherInCapital();
 
-    @GetMapping("/weather/{countryName}")
+    @GetMapping("/{countryName}")
     public ResponseEntity<EntityModel<Weather>> getWeatherByCountryName(@PathVariable(value="countryName") String countryName) {
 
         EntityModel<Weather> returnWeather = EntityModel.of(weather.getCapitalWeather(countryName));
