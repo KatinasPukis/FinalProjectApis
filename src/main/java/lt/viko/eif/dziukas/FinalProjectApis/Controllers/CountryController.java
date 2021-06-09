@@ -32,7 +32,10 @@ public class CountryController {
                         linkTo(methodOn(CovidController.class).getCovidStatisticsByCountry(country.getName())).withRel("get-covid-statistics"),
                         linkTo(methodOn(HotelController.class).getHotelByCountryName(country.getName())).withRel("get-hotel-info"),
                         linkTo(methodOn(WeatherController.class).getWeatherByCountryName(country.getName())).withRel("get-weather-info"),
+                        linkTo(methodOn(WishlistController.class).AddCountryToWishlist(country.getName())).withRel("add-to-wishlist"),
+                        linkTo(methodOn(VisitedCountriesController.class).AddCountryToVisited(country.getName())).withRel("add-to-visited"),
                         linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"))).collect(Collectors.toList());
+
         return CollectionModel.of(countries, linkTo(methodOn(CountryController.class).GetAllCountries()).withSelfRel());
     }
 
@@ -44,6 +47,8 @@ public class CountryController {
         country.add(linkTo(methodOn(CovidController.class).getCovidStatisticsByCountry(name)).withRel("get-covid-statistics"));
         country.add(linkTo(methodOn(HotelController.class).getHotelByCountryName(name)).withRel("get-hotel-info"));
         country.add(linkTo(methodOn(WeatherController.class).getWeatherByCountryName(name)).withRel("get-weather-info"));
+        country.add(linkTo(methodOn(WishlistController.class).AddCountryToWishlist(name)).withRel("add-to-wishlist"));
+        country.add(linkTo(methodOn(VisitedCountriesController.class).AddCountryToVisited(name)).withRel("add-to-visited"));
         country.add(linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"));
         return ResponseEntity.ok(country);
     }

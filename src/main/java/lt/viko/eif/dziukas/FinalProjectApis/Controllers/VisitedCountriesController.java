@@ -28,8 +28,10 @@ public class VisitedCountriesController {
                         linkTo(methodOn(HotelController.class).getHotelByCountryName(country.getName())).withRel("get-hotel-info"),
                         linkTo(methodOn(WeatherController.class).getWeatherByCountryName(country.getName())).withRel("get-weather-info"),
                         linkTo(methodOn(CountryController.class).GetCountryByName(country.getName())).withRel("get-country-info"),
+                        linkTo(methodOn(VisitedCountriesController.class).RemoveCountryFromVisited(country.getName())).withRel("remove-country-from-visited"),
                         linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"))).collect(Collectors.toList());
-        return CollectionModel.of(countries, linkTo(methodOn(VisitedCountriesController.class).GetAllVisitedCountries()).withSelfRel());
+        return CollectionModel.of(countries, linkTo(methodOn(VisitedCountriesController.class).GetAllVisitedCountries()).withSelfRel(),
+                linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"));
     }
 
     @PostMapping("{countryName}")

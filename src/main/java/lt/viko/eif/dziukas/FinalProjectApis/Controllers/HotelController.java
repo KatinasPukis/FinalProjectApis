@@ -26,7 +26,7 @@ public class HotelController {
         EntityModel<Hotel> returnHotel = EntityModel.of(hotel.getBestHotelInTheCapital(countryName, countries.GetCountryCapitalByName(countryName)));
         returnHotel.add(linkTo(methodOn(HotelController.class).getHotelByCountryName(countryName)).withSelfRel());
         returnHotel.add(linkTo(methodOn(CovidController.class).getCovidStatisticsByCountry(countryName)).withRel("get-country-covid-info"));
-        returnHotel.add(linkTo(methodOn(WeatherController.class).getWeatherByCountryName(countryName)).withRel("get-country-hotel-info"));
+        returnHotel.add(linkTo(methodOn(WeatherController.class).getWeatherByCountryName(countryName)).withRel("get-country-weather-info"));
         returnHotel.add(linkTo(methodOn(CountryController.class).GetCountryByName(countryName)).withRel("get-country-info"));
         returnHotel.add(linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"));
         return ResponseEntity.ok(returnHotel);
