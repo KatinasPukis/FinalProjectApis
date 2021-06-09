@@ -41,7 +41,10 @@ public class VisitedCountriesController {
         }
         catch(Exception exc) {
             System.out.println(exc.getMessage());
-            return new ResponseEntity<>(exc.getMessage(), HttpStatus.BAD_REQUEST);
+            if(exc.getMessage().equals("country does not exist")){
+                return new ResponseEntity<>(exc.getMessage(), HttpStatus.NOT_FOUND);}
+            else
+                return new ResponseEntity<>(exc.getMessage(), HttpStatus.CONFLICT);
         }
     }
 
@@ -49,11 +52,11 @@ public class VisitedCountriesController {
     public ResponseEntity<String> RemoveCountryFromVisited(@PathVariable(value="countryName") String countryName){
         try {
             repository.RemoveCountryFromVisited(countryName);
-            return new ResponseEntity<>("resource removed successfully", HttpStatus.CREATED);
+            return new ResponseEntity<>("resource removed successfully", HttpStatus.OK);
         }
         catch(Exception exc) {
             System.out.println(exc.getMessage());
-            return new ResponseEntity<>(exc.getMessage(), HttpStatus.BAD_REQUEST);
+            return new ResponseEntity<>(exc.getMessage(), HttpStatus.NOT_FOUND);
         }
     }
 

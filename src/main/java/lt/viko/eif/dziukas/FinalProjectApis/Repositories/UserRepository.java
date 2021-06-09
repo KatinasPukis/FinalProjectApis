@@ -65,7 +65,7 @@ public class UserRepository {
                     } catch(Exception exc) { throw new Exception("couldn't add resource"); }
                 }
             }
-            throw new Exception("Country does not exist");
+            throw new Exception("country does not exist");
         }catch(Exception exc) { throw new Exception(exc.getMessage()); }
     }
 
@@ -74,7 +74,7 @@ public class UserRepository {
         {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
             Statement statement = connection.createStatement();
-            statement.execute(String.format("DELETE FROM `countrytovisit` WHERE Country='%s';", countryName));
+            statement.executeQuery(String.format("DELETE FROM `countrytovisit` WHERE Country='%s';", countryName));
         }
         catch(Exception exc)
         {
@@ -95,7 +95,7 @@ public class UserRepository {
                     } catch(Exception exc) { throw new Exception("couldn't add resource"); }
                 }
             }
-            throw new Exception("Country does not exist");
+            throw new Exception("country does not exist");
         }catch(Exception exc) { throw new Exception(exc.getMessage()); }
     }
 
@@ -104,7 +104,7 @@ public class UserRepository {
         {
             Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
             Statement statement = connection.createStatement();
-            statement.execute(String.format("DELETE FROM `countryvisited` WHERE Country='%s';", countryName));
+            statement.executeQuery(String.format("DELETE FROM `countryvisited` WHERE Country='%s';", countryName));
         }
         catch(Exception exc)
         {
