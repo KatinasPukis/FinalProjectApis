@@ -2,12 +2,29 @@ package lt.viko.eif.dziukas.FinalProjectApis.APIs;
 
 import com.google.gson.Gson;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.BestCapitalHotelModel.Hotel;
-import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 
+/**
+ * Class represents Hotel API from https://rapidapi.com/,
+ * it has one method named getBestHotelInTheCapital.
+ *
+ * @author Dainoras Ziukas, Valdemar Subotkovski, Dominykas Pleteras
+ * @version 1.0
+ * @since 1.0
+ */
 public class BestCapitalHotel {
+
+    /**
+     * Method gets okHttpClient request from hotel api to get
+     * the best hotel in the dedicated city and
+     * parses the json response to the POJO.
+     *
+     * @param countryName Countries name.
+     * @param countryCapital selected countries any city (preferably countries capital city).
+     * @return the Hotel object or null if faulted.
+     */
     public Hotel getBestHotelInTheCapital (String countryName, String countryCapital) {
         try {
             OkHttpClient client = new OkHttpClient();

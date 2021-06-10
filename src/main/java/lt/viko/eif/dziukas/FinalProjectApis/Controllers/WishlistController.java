@@ -15,11 +15,26 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+/**
+ * Class represents Wishlist Countries controller with the three methods
+ * named getAllVisitedCountries, AddCountryToWishlist and RemoveCountryFromWishlist.
+ *
+ * @author Dainoras Ziukas, Valdemar Subotkovski, Dominykas Pleteras
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping(value = "api/wishlist",  produces = MediaType.APPLICATION_JSON_VALUE)
 public class WishlistController {
     private static UserRepository repository = new UserRepository();
 
+    /**
+     * Method dedicated to get the wishlist (wish to visit) countries from repository and turn it into
+     * collection model with each country being entity model. Every entity model has
+     * all related HATEOAS links.
+     *
+     * @return collection model of entity model countries with corresponded links.
+     */
     @GetMapping
     public CollectionModel<EntityModel<Country>> GetAllVisitedCountries() {
         List<EntityModel<Country>> countries = repository.GetWishlist().getCountries().stream().map(
@@ -34,6 +49,12 @@ public class WishlistController {
             linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"));
     }
 
+    /**
+     * Method dedicated to POST a new country into wishlist repository table with path variable country name.
+     *
+     * @param countryName countries name
+     * @return response entity string (If added - CREATED, if doesn't exist - NOT_FOUND, if it's already added - CONFLICT)
+     */
     @PostMapping("{countryName}")
     public ResponseEntity<String> AddCountryToWishlist(@PathVariable(value="countryName") String countryName) {
 
@@ -50,6 +71,13 @@ public class WishlistController {
         }
     }
 
+    /**
+     * Method dedicated to DELETE a selected country from wishlist
+     * repository table with path variable country name.
+     *
+     * @param countryName countries name
+     * @return Response entity string (if successfully removed - OK, if country doesn't exist - NOT_FOUND)
+     */
     @DeleteMapping("{countryName}")
     public ResponseEntity<String> RemoveCountryFromWishlist(@PathVariable(value="countryName") String countryName){
         try {

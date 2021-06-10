@@ -10,7 +10,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class represents Weather API from https://rapidapi.com/,
+ * it has one method named WeatherInCapital
+ *
+ * @author Dainoras Ziukas, Valdemar Subotkovski, Dominykas Pleteras
+ * @version 1.0
+ * @since 1.0
+ */
 public class WeatherInCapital {
+
+    /***
+     * Method gets okHttpClient request from Weather api to get
+     * selected capital weather situation. Afterwards the JSON response is
+     * subtracted and parsed to POJO.
+     *
+     * @param name Countries city (preferably countries capital city)
+     * @return Weather object or null if faulted
+     */
     public Weather getCapitalWeather(String name) {
         try {
             OkHttpClient client = new OkHttpClient();

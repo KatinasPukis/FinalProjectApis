@@ -9,9 +9,23 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Class represents UserRepository which is dedicated to
+ * repository integration with the project and sql commands for the
+ * selected methods.
+ *
+ * @author Dainoras Ziukas, Valdemar Subotkovski, Dominykas Pleteras
+ * @version 1.0
+ * @since 1.0
+ */
 public class UserRepository {
     private static RESTCountries countriesAPI = new RESTCountries();
 
+    /**
+     * Method that takes from repository table all the visited countries
+     *
+     * @return visited countries.
+     */
     public Countries GetCountriesVisited() {
         try
         {
@@ -32,6 +46,11 @@ public class UserRepository {
         }
     }
 
+    /**
+     * Method that takes all the ,,wish to visit" countries from the repository table.
+     *
+     * @return wishlist countries.
+     */
     public Countries GetWishlist() {
         try
         {
@@ -52,6 +71,12 @@ public class UserRepository {
         }
     }
 
+    /**
+     * Method that adds country to the wishlist table repository.
+     *
+     * @param countryName country name.
+     * @throws Exception if country doesn't exist or already added into the table.
+     */
     public void AddCountryToWishlist(String countryName) throws Exception {
 
         try {
@@ -69,6 +94,12 @@ public class UserRepository {
         }catch(Exception exc) { throw new Exception(exc.getMessage()); }
     }
 
+    /**
+     * Method that removes country from the wishlist table repository.
+     *
+     * @param countryName country name.
+     * @throws Exception if country is not in the repository table.
+     */
     public void RemoveCountryFromWishlist(String countryName) throws Exception {
         try
         {
@@ -82,6 +113,12 @@ public class UserRepository {
         }
     }
 
+    /**
+     * Method that adds country to the visited table repository.
+     *
+     * @param countryName countries name.
+     * @throws Exception if country doesn't exist or already added into the table.
+     */
     public void AddCountryToVisited(String countryName) throws Exception {
 
         try {
@@ -99,6 +136,12 @@ public class UserRepository {
         }catch(Exception exc) { throw new Exception(exc.getMessage()); }
     }
 
+    /**
+     * Method that removes country from the visited table repository.
+     *
+     * @param countryName countries name.
+     * @throws Exception if country is not in the repository table.
+     */
     public void RemoveCountryFromVisited(String countryName) throws Exception {
         try
         {

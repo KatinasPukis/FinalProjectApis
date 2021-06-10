@@ -11,11 +11,26 @@ import org.springframework.web.bind.annotation.*;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+/**
+ * Class represents Covid controller with the two methods
+ * named getWorldCovidStatistics and getCovidStatisticsByCountry.
+ *
+ * @author Dainoras Ziukas, Valdemar Subotkovski, Dominykas Pleteras
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping(value = "api/covid",  produces = MediaType.APPLICATION_JSON_VALUE)
 public class CovidController {
+
     private static COVID19 covid19 = new COVID19();
 
+    /**
+     * Method to get worlds covid statistics with the
+     * entity model representation and corresponded links.
+     *
+     * @return response entity ok - worldStats
+     */
     @GetMapping
     @ResponseBody
     public ResponseEntity<EntityModel<WorldStats>> getWorldCovidStatistics() {
@@ -25,6 +40,14 @@ public class CovidController {
         return ResponseEntity.ok(worldStats);
     }
 
+    /**
+     * Method to get covid statistics by selected country, it uses
+     * entity model representation of the statistics, has all related
+     * HATEOAS links.
+     *
+     * @param country countries name
+     * @return response entity ok - statistics
+     */
     @GetMapping("/{country}")
     @ResponseBody
     public ResponseEntity<EntityModel<Statistics>> getCovidStatisticsByCountry(@PathVariable(value="country") String country) {

@@ -18,11 +18,28 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+/**
+ * Class represents Country controller with the two methods
+ * named getAllCountries and GetCountryByName.
+ *
+ * @author Dainoras Ziukas, Valdemar Subotkovski, Dominykas Pleteras
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping(value = "api/countries",  produces = MediaType.APPLICATION_JSON_VALUE)
 public class CountryController {
+
     private static RESTCountries restcountries = new RESTCountries();
 
+    /**
+     * Method to get all countries - that turns resource to the
+     * entity model and resources to the collection model for the
+     * representation. Moreover every country entity model has
+     * a corresponded HATEOAS self link and other related links.
+     *
+     * @return collection model of countries
+     */
     @GetMapping
     public CollectionModel<EntityModel<Country>> GetAllCountries() {
 
@@ -39,6 +56,13 @@ public class CountryController {
         return CollectionModel.of(countries, linkTo(methodOn(CountryController.class).GetAllCountries()).withSelfRel());
     }
 
+    /**
+     * Method to get full country information (with weather, hotel, covid19 stats) by its name
+     * The object is turned to entity model it has self link and other related links.
+     *
+     * @param name countries name
+     * @return response entity ok - country
+     */
     @GetMapping("/{countryName}")
     public ResponseEntity<EntityModel<CountryCovidHotelWeatherModel>> GetCountryByName(@PathVariable(value="countryName") String name){
 

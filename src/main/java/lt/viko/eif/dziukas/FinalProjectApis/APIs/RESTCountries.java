@@ -10,11 +10,28 @@ import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
+/**
+ * Class represents RESTCountries API from https://rapidapi.com/ with its delegated methods,
+ * it has four different methods getAllCountries, GetCountryCovidHotelWeatherByName,
+ * GetCountryByName and GetCountryCapitalByName.
+ *
+ * @author Dainoras Ziukas, Valdemar Subotkovski, Dominykas Pleteras
+ * @version 1.0
+ * @since 1.0
+ */
 public class RESTCountries {
+
     private BestCapitalHotel hotel = new BestCapitalHotel();
     private COVID19 covid = new COVID19();
     private WeatherInCapital weather = new WeatherInCapital();
 
+    /**
+     * Method gets okHttpClient request from COVID19 api to get
+     * all 250 countries data to the JSON Format, which afterwards
+     * is parsed to POJO.
+     *
+     * @return Countries object or null if faulted
+     */
     public Countries getAllCountries() {
         try {
             OkHttpClient client = new OkHttpClient();
@@ -46,7 +63,8 @@ public class RESTCountries {
     }
 
     /**
-     * Model which represents country model with covid, hotel and weather information.
+     * Method which represents combined Country model with
+     * corresponded covid, hotel and weather information.
      *
      * @return CountryCovidHotelWeatherModel object or null if faulted.
      */
@@ -76,6 +94,12 @@ public class RESTCountries {
         return null;
     }
 
+    /**
+     * Method which finds the needed country by its name.
+     *
+     * @param name Countries name
+     * @return the Country object or null if faulted
+     */
     public Country GetCountryByName(String name) {
         try {
             for (Country temp: getAllCountries().getCountries()) {
@@ -91,6 +115,12 @@ public class RESTCountries {
         return null;
     }
 
+    /**
+     * Method which finds the countries capital city by countries name.
+     *
+     * @param countryName countries name
+     * @return countries capital name or null if faulted
+     */
     public String GetCountryCapitalByName(String countryName) {
         try {
             for (Country country: getAllCountries().getCountries()) {

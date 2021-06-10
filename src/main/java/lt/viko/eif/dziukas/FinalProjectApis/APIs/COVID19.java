@@ -13,8 +13,24 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+/**
+ * Class represents two different COVID19 API's from https://rapidapi.com/,
+ * has two methods getCovidStatisticsByCountryAPI and getCOVID19WorldStats.
+ *
+ * @author Dainoras Ziukas, Valdemar Subotkovski, Dominykas Pleteras
+ * @version 1.0
+ * @since 1.0
+ */
 public class COVID19 {
 
+    /**
+     * Method gets okHttpClient request from COVID19 api to get
+     * the covid stats per country. After that, these stats
+     * are parsed from JSON to POJO.
+     *
+     * @param country selected country name.
+     * @return Statistics object or null if faulted.
+     */
     public Statistics getCovidStatisticsByCountryAPI (String country) {
         OkHttpClient client = new OkHttpClient();
 
@@ -52,6 +68,13 @@ public class COVID19 {
         return CountryResponse;
     }
 
+    /**
+     * Method gets okHttpClient request from COVID19 api to get
+     * world stats of corona cases, deaths, tests and etc in JSON format,
+     * after that, JSON is parsed to POJO class.
+     *
+     * @return WorldStats object or null if faulted.
+     */
     public WorldStats getCovid19WorldStats() {
         try {
             OkHttpClient client = new OkHttpClient();

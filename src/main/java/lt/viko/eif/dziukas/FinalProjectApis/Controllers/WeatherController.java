@@ -13,11 +13,28 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+/**
+ * Class represents Weather controller with the single method
+ * named getWeatherByCountryName.
+ *
+ * @author Dainoras Ziukas, Valdemar Subotkovski, Dominykas Pleteras
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping(value = "api/weather",  produces = MediaType.APPLICATION_JSON_VALUE)
 public class WeatherController {
+
     private static WeatherInCapital weather = new WeatherInCapital();
 
+    /**
+     * Method dedicated to get the the capital weather by country and return it
+     * with representational entity model.
+     * This model has all related HATEOAS links.
+     *
+     * @param countryName countries name
+     * @return response entity ok - weather
+     */
     @GetMapping("/{countryName}")
     public ResponseEntity<EntityModel<Weather>> getWeatherByCountryName(@PathVariable(value="countryName") String countryName) {
 

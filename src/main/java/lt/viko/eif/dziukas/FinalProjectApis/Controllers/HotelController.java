@@ -14,12 +14,29 @@ import org.springframework.web.bind.annotation.RestController;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+/**
+ * Class represents Hotel controller with the single method
+ * named getHotelByCountryName.
+ *
+ * @author Dainoras Ziukas, Valdemar Subotkovski, Dominykas Pleteras
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping(value = "api/hotels",  produces = MediaType.APPLICATION_JSON_VALUE)
 public class HotelController {
+
     private static BestCapitalHotel hotel = new BestCapitalHotel();
     private static RESTCountries countries = new RESTCountries();
 
+    /**
+     * Method dedicated to get the best hotel by country and return it
+     * with representational entity model, this model has all related HATEOAS
+     * links.
+     *
+     * @param countryName countries name
+     * @return response entity ok - hotel
+     */
     @GetMapping("/{countryName}")
     public ResponseEntity<EntityModel<Hotel>> getHotelByCountryName(@PathVariable(value="countryName") String countryName) {
 
