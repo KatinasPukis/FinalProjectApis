@@ -13,6 +13,5 @@ public class ShowCountrys extends RESTCountries {
     @Then("Show all countries info")
     public void show_all_countries_info() {
         System.out.println(getAllCountries());
-
     }
 }
