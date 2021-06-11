@@ -4,11 +4,16 @@ import com.google.gson.Gson;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryCovidHotelWeatherModel;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Countries;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
+import lt.viko.eif.dziukas.FinalProjectApis.Model.ZonesModel;
+import lt.viko.eif.dziukas.FinalProjectApis.Repositories.UserRepository;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.Response;
 import org.json.JSONArray;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Class represents RESTCountries API from https://rapidapi.com/ with its delegated methods,
@@ -24,7 +29,7 @@ public class RESTCountries {
     private BestCapitalHotel hotel = new BestCapitalHotel();
     private COVID19 covid = new COVID19();
     private WeatherInCapital weather = new WeatherInCapital();
-
+    private UserRepository repository = new UserRepository();
     /**
      * Method gets okHttpClient request from COVID19 api to get
      * all 250 countries data to the JSON Format, which afterwards
@@ -60,6 +65,28 @@ public class RESTCountries {
             System.out.println(exc);
         }
         return null;
+    }
+
+    //make javadoc
+    public ZonesModel GetCountriesByZones() {
+
+        List<Country> red = new ArrayList<>();
+        List<Country> yellow = new ArrayList<>();
+        List<Country> green = new ArrayList<>();
+        for (Country country: repository.GetWishlist().getCountries()) {
+                Integer newCases = Integer.parseInt(covid.getCovidStatisticsByCountryAPI(country.getName()).getResponse().get(0).getCases().getNewCases());
+                if( newCases >= 0 && newCases < 200 )
+                    green.add(country);
+                if( newCases >= 200 && newCases < 500 )
+                    yellow.add(country);
+                if(newCases >= 500)
+                    red.add(country);
+        }
+        ZonesModel zones = new ZonesModel();
+        zones.setRedZone(red);
+        zones.setYellowZone(yellow);
+        zones.setGreenZone(green);
+        return zones;
     }
 
     /**
