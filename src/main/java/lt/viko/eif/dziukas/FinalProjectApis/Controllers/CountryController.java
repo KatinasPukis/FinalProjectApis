@@ -43,7 +43,7 @@ public class CountryController {
      *
      * @return collection model of countries
      */
-    @Then("Show all countries info")
+   // @Then("Show all countries info")
     @GetMapping
     public CollectionModel<EntityModel<Country>> GetAllCountries() {
         List<EntityModel<Country>> countries = restcountries.getAllCountries().getCountries().stream().map(

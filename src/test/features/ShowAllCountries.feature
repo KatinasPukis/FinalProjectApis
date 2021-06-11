@@ -1,5 +1,5 @@
 Feature: Show all countries
 
   Scenario: Show all countries info
-    When User opens up all countries
+    When When the Client calls countries
     Then Show all countries info
