@@ -3,6 +3,8 @@ package lt.viko.eif.dziukas.FinalProjectApis.Repositories;
 import lt.viko.eif.dziukas.FinalProjectApis.APIs.RESTCountries;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Countries;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
+import org.springframework.hateoas.RepresentationModel;
+import springfox.documentation.service.Representation;
 
 import java.sql.*;
 import java.time.LocalDate;
@@ -18,7 +20,7 @@ import java.util.List;
  * @version 1.0
  * @since 1.0
  */
-public class UserRepository {
+public class UserRepository extends RepresentationModel {
     private static RESTCountries countriesAPI = new RESTCountries();
 
     /**
