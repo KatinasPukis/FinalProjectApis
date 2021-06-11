@@ -1,4 +1,5 @@
-Feature: See all covid statistics
-  Scenarios Show all covid statistics
-  When User clicks on show covid statistics
-  Then Show all covid statistics
+Feature: Show all countries
+
+  Scenario: Show all countries info
+    When User opens up all countries
+    Then Show all countries info

@@ -1,5 +1,6 @@
 package lt.viko.eif.dziukas.FinalProjectApis.Controllers;
 
+import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryCovidHotelWeatherModel;
 import lt.viko.eif.dziukas.FinalProjectApis.APIs.RESTCountries;
@@ -27,6 +28,7 @@ import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
  * @version 1.0
  * @since 1.0
  */
+
 @RestController
 @RequestMapping(value = "api/countries",  produces = MediaType.APPLICATION_JSON_VALUE)
 public class CountryController {
@@ -41,10 +43,9 @@ public class CountryController {
      *
      * @return collection model of countries
      */
-
+    @Then("Show all countries info")
     @GetMapping
     public CollectionModel<EntityModel<Country>> GetAllCountries() {
-
         List<EntityModel<Country>> countries = restcountries.getAllCountries().getCountries().stream().map(
                         country -> EntityModel.of(country,
                         linkTo(methodOn(CountryController.class).GetCountryByName(country.getName())).withSelfRel(),

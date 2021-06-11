@@ -1,6 +1,7 @@
 package lt.viko.eif.dziukas.FinalProjectApis.APIs;
 
 import com.google.gson.Gson;
+import io.cucumber.java.en.When;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryCovidHotelWeatherModel;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Countries;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
@@ -38,8 +39,10 @@ public class RESTCountries {
      *
      * @return Countries object or null if faulted
      */
+    @When("User opens up all countries")
     public Countries getAllCountries() {
         try {
+
             OkHttpClient client = new OkHttpClient();
 
             Request request = new Request.Builder()
@@ -65,6 +68,7 @@ public class RESTCountries {
         catch (Exception exc) {
             System.out.println(exc);
         }
+
         return null;
     }
 
