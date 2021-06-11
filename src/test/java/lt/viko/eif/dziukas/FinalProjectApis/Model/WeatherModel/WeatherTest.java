@@ -42,7 +42,7 @@ class WeatherTest {
     void getTempMin() {
         Weather instance = new Weather();
         instance.setTempMin(26.1);
-        Double result = instance.getTemp();
+        Double result = instance.getTempMin();
         assertEquals(26.1, result);
     }
 
@@ -63,7 +63,7 @@ class WeatherTest {
     void getHumidity() {
         Weather instance = new Weather();
         instance.setHumidity(45.0);
-        Double result = instance.getTemp();
+        Double result = instance.getHumidity();
         assertEquals(45.0, result);
     }
 
