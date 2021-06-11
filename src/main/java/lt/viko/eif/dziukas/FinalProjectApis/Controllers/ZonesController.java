@@ -17,11 +17,26 @@ import java.util.stream.Collectors;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
+/**
+ * Class represents Zones controller with four methods
+ * GetAllZones, GetRedZone, GetYellowZone, GetGreenZone.
+ *
+ * @author Dainoras Ziukas, Valdemar Subotkovski, Dominykas Pleteras
+ * @version 1.0
+ * @since 1.0
+ */
 @RestController
 @RequestMapping(value = "api/zones",  produces = MediaType.APPLICATION_JSON_VALUE)
 public class ZonesController {
     private static RESTCountries countries = new RESTCountries();
 
+    /**
+     * Method to get all zones - that returns resource as
+     * response entity of entity model of Zones.
+     * Model has a corresponded HATEOAS self link and other related links.
+     *
+     * @return Response entity of Zones model
+     */
     @GetMapping
     public ResponseEntity<EntityModel<ZonesModel>> GetAllZones() {
 
@@ -31,6 +46,13 @@ public class ZonesController {
         return ResponseEntity.ok(zoneCountries);
     }
 
+    /**
+     * Method to get countries in red zone - that returns resource as
+     * collection model of entity model of country.
+     * Model has a corresponded HATEOAS self link and other related links.
+     *
+     * @return collection model of countries in red zone
+     */
     @GetMapping("/red")
     public CollectionModel<EntityModel<Country>> GetRedZone() {
 
@@ -46,6 +68,13 @@ public class ZonesController {
                 linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"));
     }
 
+    /**
+     * Method to get countries in yellow zone - that returns resource as
+     * collection model of entity model of country.
+     * Model has a corresponded HATEOAS self link and other related links.
+     *
+     * @return collection model of countries in yellow zone
+     */
     @GetMapping("/yellow")
     public CollectionModel<EntityModel<Country>> GetYellowZone() {
 
@@ -61,6 +90,13 @@ public class ZonesController {
                 linkTo(methodOn(CountryController.class).GetAllCountries()).withRel("get-all-countries"));
     }
 
+    /**
+     * Method to get countries in green zone - that returns resource as
+     * collection model of entity model of country.
+     * Model has a corresponded HATEOAS self link and other related links.
+     *
+     * @return collection model of countries in green zone
+     */
     @GetMapping("/green")
     public CollectionModel<EntityModel<Country>> GetGreenZone() {
 

@@ -30,6 +30,7 @@ public class RESTCountries {
     private COVID19 covid = new COVID19();
     private WeatherInCapital weather = new WeatherInCapital();
     private UserRepository repository = new UserRepository();
+
     /**
      * Method gets okHttpClient request from COVID19 api to get
      * all 250 countries data to the JSON Format, which afterwards
@@ -68,9 +69,10 @@ public class RESTCountries {
     }
 
     /**
-     * This method is used to get countries by zones.
+     * Method which returns all zones which consists of (green, yellow, red) lists
+     * as ZonesModel.
      *
-     * @return the country zones.
+     * @return Zones model.
      */
     public ZonesModel GetCountriesByZones() {
 
@@ -82,10 +84,11 @@ public class RESTCountries {
     }
 
     /**
-     * This method is used to get the red zone countries.
+     * Method which represents returns List of countries in
+     * red zone.
      *
-     * @param min is used to itentify the minimum number of new covid cases.
-     * @return the red covid zone.
+     * @param min minimum of new cases by country.
+     * @return list of countries.
      */
     public List<Country> GetRedZoneCountries(Integer min) {
         List<Country> red = new ArrayList<>();
@@ -98,11 +101,12 @@ public class RESTCountries {
     }
 
     /**
-     * This method is used to get the yellow zone countries.
+     * Method which represents returns List of countries in
+     * yellow zone.
      *
-     * @param min the minimum value of new covid cases.
-     * @param max the maximum value of new covid cases.
-     * @return the yellow covid zone.
+     * @param min minimum of new cases by country.
+     * @param max maximum of new cases by country.
+     * @return list of countries.
      */
     public List<Country> GetYellowZoneCountries(Integer min, Integer max) {
         List<Country> yellow = new ArrayList<>();
@@ -115,11 +119,12 @@ public class RESTCountries {
     }
 
     /**
-     * This method is used to get the green zone countries.
+     * Method which represents returns List of countries in
+     * green zone.
      *
-     * @param min the minimum value of new covid cases.
-     * @param max the maximum value of new covid cases.
-     * @return the green covid zone.
+     * @param min minimum of new cases by country.
+     * @param max maximum of new cases by country.
+     * @return list of countries.
      */
     public List<Country> GetGreenZoneCountries(Integer min, Integer max) {
         List<Country> green = new ArrayList<>();
