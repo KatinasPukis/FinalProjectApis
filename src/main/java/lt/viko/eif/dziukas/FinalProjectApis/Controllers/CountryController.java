@@ -1,5 +1,6 @@
 package lt.viko.eif.dziukas.FinalProjectApis.Controllers;
 
+import io.cucumber.java.en.When;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.CountryCovidHotelWeatherModel;
 import lt.viko.eif.dziukas.FinalProjectApis.APIs.RESTCountries;
 import lt.viko.eif.dziukas.FinalProjectApis.Model.RESTCountriesModels.Country;
@@ -40,6 +41,7 @@ public class CountryController {
      *
      * @return collection model of countries
      */
+
     @GetMapping
     public CollectionModel<EntityModel<Country>> GetAllCountries() {
 

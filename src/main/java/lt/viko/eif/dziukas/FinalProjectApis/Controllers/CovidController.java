@@ -31,6 +31,7 @@ public class CovidController {
      *
      * @return response entity ok - worldStats
      */
+
     @GetMapping
     @ResponseBody
     public ResponseEntity<EntityModel<WorldStats>> getWorldCovidStatistics() {
