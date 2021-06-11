@@ -67,7 +67,11 @@ public class RESTCountries {
         return null;
     }
 
-    //make javadoc
+    /**
+     * This method is used to get countries by zones.
+     *
+     * @return the country zones.
+     */
     public ZonesModel GetCountriesByZones() {
 
         ZonesModel zones = new ZonesModel();
@@ -77,6 +81,12 @@ public class RESTCountries {
         return zones;
     }
 
+    /**
+     * This method is used to get the red zone countries.
+     *
+     * @param min is used to itentify the minimum number of new covid cases.
+     * @return the red covid zone.
+     */
     public List<Country> GetRedZoneCountries(Integer min) {
         List<Country> red = new ArrayList<>();
         for (Country country: repository.GetWishlist().getCountries()) {
@@ -87,6 +97,13 @@ public class RESTCountries {
         return red;
     }
 
+    /**
+     * This method is used to get the yellow zone countries.
+     *
+     * @param min the minimum value of new covid cases.
+     * @param max the maximum value of new covid cases.
+     * @return the yellow covid zone.
+     */
     public List<Country> GetYellowZoneCountries(Integer min, Integer max) {
         List<Country> yellow = new ArrayList<>();
         for (Country country: repository.GetWishlist().getCountries()) {
@@ -97,6 +114,13 @@ public class RESTCountries {
         return yellow;
     }
 
+    /**
+     * This method is used to get the green zone countries.
+     *
+     * @param min the minimum value of new covid cases.
+     * @param max the maximum value of new covid cases.
+     * @return the green covid zone.
+     */
     public List<Country> GetGreenZoneCountries(Integer min, Integer max) {
         List<Country> green = new ArrayList<>();
         for (Country country: repository.GetWishlist().getCountries()) {
