@@ -1,6 +1,7 @@
 package lt.viko.eif.dziukas.FinalProjectApis.Model.COVID19Models;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.google.gson.annotations.SerializedName;
 
 /**
  * Represents Tests object that is a piece of
@@ -13,7 +14,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  */
 public class Tests {
 
-    @JsonProperty("1M_pop")
+    @SerializedName("1M_pop")
     public String _1M_pop;
     public int total;
 
