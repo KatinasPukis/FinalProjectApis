@@ -70,23 +70,41 @@ public class RESTCountries {
     //make javadoc
     public ZonesModel GetCountriesByZones() {
 
+        ZonesModel zones = new ZonesModel();
+        zones.setRedZone(GetRedZoneCountries(500));
+        zones.setYellowZone(GetYellowZoneCountries(200, 500));
+        zones.setGreenZone(GetGreenZoneCountries(0,200));
+        return zones;
+    }
+
+    public List<Country> GetRedZoneCountries(Integer min) {
         List<Country> red = new ArrayList<>();
+        for (Country country: repository.GetWishlist().getCountries()) {
+            Integer newCases = Integer.parseInt(covid.getCovidStatisticsByCountryAPI(country.getName()).getResponse().get(0).getCases().getNewCases());
+            if(newCases >= min)
+                red.add(country);
+        }
+        return red;
+    }
+
+    public List<Country> GetYellowZoneCountries(Integer min, Integer max) {
         List<Country> yellow = new ArrayList<>();
+        for (Country country: repository.GetWishlist().getCountries()) {
+            Integer newCases = Integer.parseInt(covid.getCovidStatisticsByCountryAPI(country.getName()).getResponse().get(0).getCases().getNewCases());
+            if( newCases >= min&& newCases < max )
+                yellow.add(country);
+        }
+        return yellow;
+    }
+
+    public List<Country> GetGreenZoneCountries(Integer min, Integer max) {
         List<Country> green = new ArrayList<>();
         for (Country country: repository.GetWishlist().getCountries()) {
-                Integer newCases = Integer.parseInt(covid.getCovidStatisticsByCountryAPI(country.getName()).getResponse().get(0).getCases().getNewCases());
-                if( newCases >= 0 && newCases < 200 )
-                    green.add(country);
-                if( newCases >= 200 && newCases < 500 )
-                    yellow.add(country);
-                if(newCases >= 500)
-                    red.add(country);
+            Integer newCases = Integer.parseInt(covid.getCovidStatisticsByCountryAPI(country.getName()).getResponse().get(0).getCases().getNewCases());
+            if( newCases >= min && newCases < max )
+                green.add(country);
         }
-        ZonesModel zones = new ZonesModel();
-        zones.setRedZone(red);
-        zones.setYellowZone(yellow);
-        zones.setGreenZone(green);
-        return zones;
+        return green;
     }
 
     /**
