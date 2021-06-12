@@ -58,5 +58,6 @@ public class CovidController {
         statistics.add(linkTo(methodOn(CountryController.class).GetCountryByName(country)).withRel("get-country-info"));
         statistics.add(linkTo(methodOn(CovidController.class).getWorldCovidStatistics()).withRel("get-world-stats"));
         return ResponseEntity.ok(statistics);
+
     }
 }

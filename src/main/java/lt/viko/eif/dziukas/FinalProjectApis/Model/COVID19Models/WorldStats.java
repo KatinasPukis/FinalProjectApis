@@ -185,4 +185,18 @@ public class WorldStats {
     public void setTotalDeaths(String totalDeaths) {
         this.totalDeaths = totalDeaths;
     }
+
+    @Override
+    public String toString() {
+        return "WorldStats{" +
+                "activeCases='" + activeCases + '\'' +
+                ", name='" + name + '\'' +
+                ", lastUpdate='" + lastUpdate + '\'' +
+                ", newCases='" + newCases + '\'' +
+                ", newDeaths='" + newDeaths + '\'' +
+                ", totalCases='" + totalCases + '\'' +
+                ", totalDeaths='" + totalDeaths + '\'' +
+                ", TotalRecovered_text='" + TotalRecovered_text + '\'' +
+                '}';
+    }
 }

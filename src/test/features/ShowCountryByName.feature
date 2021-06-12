@@ -1,8 +1,8 @@
-Feature: Show a countrys info by its name
+Feature: Show a country by its name
 
-  Scenario Outline: Show a country by its name
-    When When the Client calls for a specific country by "<name>"
-    Then It will send back the countrys info
+  Scenario Outline: Show a specific country by its name
+    When When the Client calls for a specific country
+    Then The country is returned with its "<info>"
     Examples:
-    |name     |
+    |info     |
     |Lithuania|
