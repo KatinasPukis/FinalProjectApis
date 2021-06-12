@@ -145,30 +145,22 @@ public class RESTCountries {
      *
      * @return CountryCovidHotelWeatherModel object or null if faulted.
      */
-    public CountryCovidHotelWeatherModel GetCountryCovidHotelWeatherByName(String name) {
-        try {
+    public CountryCovidHotelWeatherModel GetCountryCovidHotelWeatherByName(String name) throws Exception {
 
-            CountryCovidHotelWeatherModel countryFull = new CountryCovidHotelWeatherModel();
-            Country countryToAdd = new Country();
-
-            for (Country country: getAllCountries().getCountries()) {
-                if(country.getName().equals(name))
-                {
-                    countryToAdd = country;
-                }
+        CountryCovidHotelWeatherModel countryFull = new CountryCovidHotelWeatherModel();
+        Country countryToAdd;
+        for (Country country: getAllCountries().getCountries()) {
+            if(country.getName().equals(name))
+            {
+                countryToAdd = country;
+                countryFull.setCountry(countryToAdd);
+                countryFull.setBestHotelInCountriesCapital(hotel.getBestHotelInTheCapital(countryToAdd.getName(), countryToAdd.getCapital()));
+                countryFull.setCovidStatistics(covid.getCovidStatisticsByCountryAPI(countryToAdd.getName()));
+                countryFull.setWeather(weather.getCapitalWeather(countryToAdd.getName()));
+                return countryFull;
             }
-
-            countryFull.setCountry(countryToAdd);
-            countryFull.setBestHotelInCountriesCapital(hotel.getBestHotelInTheCapital(countryToAdd.getName(), countryToAdd.getCapital()));
-            countryFull.setCovidStatistics(covid.getCovidStatisticsByCountryAPI(countryToAdd.getName()));
-            countryFull.setWeather(weather.getCapitalWeather(countryToAdd.getName()));
-
-            return countryFull;
         }
-        catch (Exception exc) {
-            System.out.println(exc);
-        }
-        return null;
+        throw new Exception("not found");
     }
 
     /**
