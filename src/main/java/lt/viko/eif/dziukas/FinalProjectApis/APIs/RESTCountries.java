@@ -39,7 +39,6 @@ public class RESTCountries {
      *
      * @return Countries object or null if faulted
      */
-    //@When("User opens up all countries")
     public Countries getAllCountries() {
         try {
 
