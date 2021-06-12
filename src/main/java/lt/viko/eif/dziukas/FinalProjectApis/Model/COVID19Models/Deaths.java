@@ -17,7 +17,7 @@ public class Deaths {
 
         @SerializedName("new")
         public String newDeaths;
-        @SerializedName("_1M_pop")
+        @SerializedName("1M_pop")
         public String _1M_pop;
         public int total;
 

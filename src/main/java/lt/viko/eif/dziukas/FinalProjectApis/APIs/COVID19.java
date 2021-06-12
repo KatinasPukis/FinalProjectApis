@@ -32,40 +32,32 @@ public class COVID19 {
      * @return Statistics object or null if faulted.
      */
     public Statistics getCovidStatisticsByCountryAPI (String country) {
-        OkHttpClient client = new OkHttpClient();
-
-        Request request = new Request.Builder()
-                .url("https://covid-193.p.rapidapi.com/statistics?country=" + country)
-                .get()
-                .addHeader("x-rapidapi-key", "3a72bede79msh3e5d354bbb1baa6p168035jsn8f45e363d125")
-                .addHeader("x-rapidapi-host", "covid-193.p.rapidapi.com")
-                .build();
-
-        Response response = null;
         try {
-            response = client.newCall(request).execute();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        String json = null;
-        try {
-            json = response.body().string();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        JSONObject jsonObject = new JSONObject(json);
-        JSONArray countryStatistic = new JSONArray(jsonObject.getJSONArray("response"));
+            Gson gson = new Gson();
+            JSONObject obj = new JSONObject();
+            OkHttpClient client = new OkHttpClient();
 
-        JSONObject obj = new JSONObject();
-        try {
+            Request request = new Request.Builder()
+                    .url("https://covid-193.p.rapidapi.com/statistics?country=" + country)
+                    .get()
+                    .addHeader("x-rapidapi-key", "3a72bede79msh3e5d354bbb1baa6p168035jsn8f45e363d125")
+                    .addHeader("x-rapidapi-host", "covid-193.p.rapidapi.com")
+                    .build();
+
+            Response response = client.newCall(request).execute();
+            String json = response.body().string();
+            JSONObject jsonObject = new JSONObject(json);
+            JSONArray countryStatistic = new JSONArray(jsonObject.getJSONArray("response"));
             obj.put("response", countryStatistic); // prie masyvo prirasau zodi countries paversdamas ji ne masyvu, o visu objektu, kad vps leistu parse'int (countries:(saliu pavadinimu masyvas))
-        } catch(JSONException e) {
-            e.printStackTrace();
+            String correntJsonString = String.valueOf(obj);
+            Statistics CountryResponse = gson.fromJson(correntJsonString, Statistics.class);
+            return CountryResponse;
         }
-        Gson gson = new Gson();
-        String correntJsonString = String.valueOf(obj);
-        Statistics CountryResponse = gson.fromJson(correntJsonString, Statistics.class);
-        return CountryResponse;
+        catch (Exception exc)
+        {
+            System.out.println(exc);
+        }
+        return null;
     }
 
     /**
