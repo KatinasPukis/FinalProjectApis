@@ -103,16 +103,17 @@ public class UserRepository extends RepresentationModel {
      * @throws Exception if country is not in the repository table.
      */
     public void RemoveCountryFromWishlist(String countryName) throws Exception {
-        try
-        {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
-            Statement statement = connection.createStatement();
-            statement.executeQuery(String.format("DELETE FROM `countrytovisit` WHERE Country='%s';", countryName));
+
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
+        Statement statement = connection.createStatement();
+        for (Country country: GetWishlist().getCountries()) {
+            if(country.getName().equals(countryName))
+            {
+                statement.execute(String.format("DELETE FROM `countrytovisit` WHERE Country='%s';", countryName));
+                return;
+            }
         }
-        catch(Exception exc)
-        {
-            throw new Exception("couldn't remove resource");
-        }
+        throw new Exception("couldn't remove resource");
     }
 
     /**
@@ -145,15 +146,16 @@ public class UserRepository extends RepresentationModel {
      * @throws Exception if country is not in the repository table.
      */
     public void RemoveCountryFromVisited(String countryName) throws Exception {
-        try
-        {
-            Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
-            Statement statement = connection.createStatement();
-            statement.executeQuery(String.format("DELETE FROM `countryvisited` WHERE Country='%s';", countryName));
+
+        Connection connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/final_project","root","");
+        Statement statement = connection.createStatement();
+        for (Country country: GetCountriesVisited().getCountries()) {
+            if(country.getName().equals(countryName))
+            {
+                statement.execute(String.format("DELETE FROM `countryvisited` WHERE Country='%s';", countryName));
+                return;
+            }
         }
-        catch(Exception exc)
-        {
-            throw new Exception("couldn't remove resource");
-        }
+        throw new Exception("couldn't remove resource");
     }
 }
